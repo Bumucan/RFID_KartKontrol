@@ -1,0 +1,38 @@
+﻿@model List<RFID_KartKontrol.Models.Kart>
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Yetkisiz Kartlar";
+}
+
+<h2 class="mb-4">Yetkisiz Kartlar</h2>
+
+<table class="table table-striped table-hover table-bordered align-middle">
+    <thead class="table-dark">
+        <tr>
+            <th>#ID</th>
+            <th>Kart UID</th>
+            <th>Durum</th>
+            <th>İşlem</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var kart in Model.Where(k => !k.KayitliMi))
+        {
+            <tr>
+                <td>@kart.KartID</td>
+                <td>@kart.KartUID</td>
+                <td>
+                    <span class="badge bg-danger">Pasif</span>
+                </td>
+                <td>
+                    <a class="btn btn-danger btn-sm" href="@Url.Action("DeleteKart", "Admin", new { id = kart.KartID })">Sil</a>
+                </td>
+                <td>
+                    <a class="btn btn-success btn-sm" href="/Admin/PersonelEkle?uid=@kart.KartUID">Personel Yap</a>
+
+                    <a class="btn btn-danger btn-sm" href="@Url.Action("DeleteKart", "Admin", new { id = kart.KartID })">Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

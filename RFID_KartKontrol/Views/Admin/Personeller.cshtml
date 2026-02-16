@@ -1,0 +1,35 @@
+﻿@model List<RFID_KartKontrol.Models.Personel>
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Personel";
+}
+
+<h2 class="mb-4">Personel Yönetimi</h2>
+
+<a class="btn btn-success mb-3" href="@Url.Action("YetkisizKartlar", "Admin")">Yeni Personel Ekle</a>
+
+<table class="table table-striped table-hover table-bordered align-middle">
+    <thead class="table-dark">
+        <tr>
+            <th>#ID</th>
+            <th>Ad Soyad</th>
+            <th>Kart UID</th>
+            <th>İşlem</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var p in Model)
+        {
+            <tr>
+                <td>@p.PersonelID</td>
+                <td>@p.AdSoyad</td>
+                <td>@p.KartUID</td>
+                <td>
+                    <a class="btn btn-primary btn-sm" href="@Url.Action("PersonelDuzenle", "Admin", new { id = p.PersonelID })">Düzenle</a>
+
+                    <a class="btn btn-danger btn-sm" href="@Url.Action("DeletePersonel", "Admin", new { id = p.PersonelID })">Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

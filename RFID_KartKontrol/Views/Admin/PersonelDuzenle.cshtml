@@ -1,0 +1,15 @@
+﻿@model RFID_KartKontrol.Models.Personel
+
+<h2>Personel Düzenle</h2>
+
+<form asp-action="PersonelDuzenle" method="post">
+    <input type="hidden" name="PersonelID" value="@Model.PersonelID" />
+
+    <label>Ad Soyad:</label><br />
+    <input type="text" name="AdSoyad" value="@Model.AdSoyad" /><br /><br />
+
+    <label>Kart UID:</label><br />
+    <input type="text" name="KartUID" value="@Model.KartUID" /><br /><br />
+
+    <button type="submit">Kaydet</button>
+</form>

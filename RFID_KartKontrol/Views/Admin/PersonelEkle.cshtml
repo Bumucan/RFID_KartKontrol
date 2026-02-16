@@ -1,0 +1,25 @@
+﻿@{
+    ViewData["Title"] = "Yeni Personel Ekle";
+    Layout = "_Layout";
+    // Eskisi (Hatalı olan):
+    // string gelenUID = Context.Request.Query["uid"];
+
+    // Yenisi (Düzeltilmiş hali):
+    string gelenUID = Context.Request.Query["uid"].ToString() ?? "";
+}
+
+<h2>Yeni Personel Ekle</h2>
+
+<form action="/Admin/PersonelEkle" method="post">
+    <div class="mb-3">
+        <label class="form-label">Kart UID (Otomatik Gelir):</label>
+        <input type="text" class="form-control" name="KartUID" value="@gelenUID" readonly />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Ad Soyad:</label>
+        <input type="text" class="form-control" name="AdSoyad" required placeholder="Örn: Mustafa Yılmaz" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Kaydet ve Bitir</button>
+</form>

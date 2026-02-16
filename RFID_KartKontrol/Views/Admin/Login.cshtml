@@ -1,0 +1,120 @@
+﻿@model RFID_KartKontrol.Models.LoginViewModel
+
+@{
+    Layout = null; // Bu sayfanın kendi özel tasarımı olsun, genel şablonu kullanmasın.
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Girişi | RFID Sistem</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+    <style>
+        /* Modern Arka Plan Gradyanı */
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Giriş Kartı Tasarımı */
+        .login-card {
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            background-color: rgba(255, 255, 255, 0.95); /* Hafif şeffaf beyaz */
+            overflow: hidden;
+        }
+
+        /* Başlık İkonu */
+        .login-header-icon {
+            font-size: 4rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Buton Tasarımı */
+        .btn-login {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            font-weight: 600;
+            padding: 12px;
+            transition: all 0.3s ease;
+        }
+
+            .btn-login:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+                background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+            }
+
+        /* Input Alanları */
+        .form-floating > .form-control:focus {
+            box-shadow: none;
+            border-color: #764ba2;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-5 col-lg-4">
+                <div class="card login-card p-4 p-md-5">
+                    <div class="card-body text-center">
+
+                        <div class="mb-4">
+                            <i class="bi bi-shield-lock-fill login-header-icon"></i>
+                            <h3 class="fw-bold mt-3 text-dark">Yönetici Girişi</h3>
+                            <p class="text-muted">Lütfen kimliğinizi doğrulayın.</p>
+                        </div>
+
+                        <form asp-action="Login" method="post">
+
+                            <div asp-validation-summary="All" class="text-danger mb-3 small text-start"></div>
+
+                            <div class="form-floating mb-3">
+                                <input asp-for="KullaniciAdi" type="text" class="form-control" id="floatingInput" placeholder="name@example.com" required>
+                                <label for="floatingInput" class="text-muted">
+                                    <i class="bi bi-person-fill me-2"></i>Kullanıcı Adı
+                                </label>
+                                <span asp-validation-for="KullaniciAdi" class="text-danger small"></span>
+                            </div>
+
+                            <div class="form-floating mb-4">
+                                <input asp-for="Sifre" type="password" class="form-control" id="floatingPassword" placeholder="Password" required>
+                                <label for="floatingPassword" class="text-muted">
+                                    <i class="bi bi-key-fill me-2"></i>Şifre
+                                </label>
+                                <span asp-validation-for="Sifre" class="text-danger small"></span>
+                            </div>
+
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-primary btn-login btn-lg text-white">
+                                    <i class="bi bi-box-arrow-in-right me-2"></i> Güvenli Giriş
+                                </button>
+                            </div>
+                        </form>
+
+                        <div class="mt-4 text-center">
+                            <a href="/" class="text-decoration-none text-muted small hover-link">
+                                <i class="bi bi-arrow-left me-1"></i> Ana Sayfaya Dön
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

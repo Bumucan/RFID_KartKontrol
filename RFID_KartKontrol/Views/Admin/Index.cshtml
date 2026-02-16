@@ -1,0 +1,83 @@
+﻿@model IEnumerable<RFID_KartKontrol.Models.GirisKaydi>
+
+@{
+    ViewData["Title"] = "Admin Paneli - Hareket Dökümü";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>🛠️ @ViewData["Title"]</h2>
+
+        <div>
+            <a asp-action="Ozet" class="btn btn-info text-white shadow-sm me-2">
+                📊 Özet Rapor
+            </a>
+            <a asp-action="Personeller" class="btn btn-primary shadow-sm me-2">
+                👥 Personel Yönetimi
+            </a>
+
+            <a asp-action="YetkisizKartlar" class="btn btn-warning shadow-sm">
+                ⚠️ Yetkisiz Kartlar
+            </a>
+        </div>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-body p-0">
+            <table class="table table-striped table-hover mb-0">
+                <thead class="table-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Kart UID</th>
+                        <th>Personel Adı</th>
+                        <th>Tarih & Saat</th>
+                        <th>Durum</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.KayitID</td>
+                            <td class="fw-bold font-monospace">@item.KartUID</td>
+
+                            <td>
+                                @if (item.PersonelAd == "YETKİSİZ / TANIMSIZ")
+                                {
+                                    <span class="text-danger fst-italic">
+                                        <i class="bi bi-exclamation-triangle"></i> Tanımsız Kart
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="text-primary fw-bold">
+                                        👤 @item.PersonelAd
+                                    </span>
+                                }
+                            </td>
+
+                            <td>@item.Tarih.ToString("dd.MM.yyyy HH:mm:ss")</td>
+
+                            <td>
+                                @if (item.Islem == 1)
+                                {
+                                    <span class="badge bg-success">GİRİŞ</span>
+                                }
+                                else if (item.Islem == 0)
+                                {
+                                    <span class="badge bg-danger">ÇIKIŞ</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-warning text-dark">YETKİSİZ</span>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

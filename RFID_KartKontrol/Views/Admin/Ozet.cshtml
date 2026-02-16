@@ -1,0 +1,91 @@
+﻿ <div class="row mt-4">
+
+    <div class="col-md-4">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h6 class="mb-0"><i class="bi bi-people"></i> Kayıtlı Personeller</h6>
+            </div>
+            <div class="card-body p-0" style="max-height: 300px; overflow-y: auto;">
+                <table class="table table-striped table-hover mb-0 text-center" style="font-size: 0.9rem;">
+                    <thead class="table-light sticky-top">
+                        <tr>
+                            <th>Kart UID</th>
+                            <th>Ad Soyad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var p in ViewBag.TumPersonelListesi)
+                        {
+                            <tr>
+                                <td class="font-monospace">@p.KartUID</td>
+                                <td class="fw-bold">@p.AdSoyad</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card shadow-sm">
+            <div class="card-header bg-success text-white">
+                <h6 class="mb-0"><i class="bi bi-shop"></i> İçerideki Personeller</h6>
+            </div>
+            <div class="card-body p-0" style="max-height: 300px; overflow-y: auto;">
+                @if (ViewBag.IceridekilerListesi != null)
+                {
+                    <table class="table table-striped table-hover mb-0 text-center" style="font-size: 0.9rem;">
+                        <thead class="table-light sticky-top">
+                            <tr>
+                                <th>Kart UID</th>
+                                <th>Ad Soyad</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var p in ViewBag.IceridekilerListesi)
+                            {
+                                <tr>
+                                    <td class="font-monospace">@p.KartUID</td>
+                                    <td class="fw-bold text-success">@p.AdSoyad</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <p class="text-center p-3">Kimse yok.</p>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card shadow-sm">
+            <div class="card-header bg-info text-white">
+                <h6 class="mb-0"><i class="bi bi-clock-history"></i> Bugün Girenler</h6>
+            </div>
+            <div class="card-body p-0" style="max-height: 300px; overflow-y: auto;">
+                <table class="table table-striped table-hover mb-0 text-center" style="font-size: 0.9rem;">
+                    <thead class="table-light sticky-top">
+                        <tr>
+                            <th>Ad Soyad</th>
+                            <th>Saat</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in ViewBag.BugunGirenlerListesi)
+                        {
+                            <tr>
+                                <td class="fw-bold">@item.AdSoyad</td>
+                                <td>@item.Saat.ToString("HH:mm")</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>

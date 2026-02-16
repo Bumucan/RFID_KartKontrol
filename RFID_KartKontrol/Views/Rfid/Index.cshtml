@@ -1,0 +1,53 @@
+﻿@model IEnumerable<RFID_KartKontrol.Models.GirisKaydi>
+
+@{
+    ViewData["Title"] = "Giriş / Çıkış Takibi";
+}
+
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>📋 @ViewData["Title"]</h1>
+
+        <a asp-controller="Admin" asp-action="Login" class="btn btn-dark btn-lg">
+            🔒 Yönetici Paneli
+        </a>
+    </div>
+
+    <table class="table table-bordered table-striped table-hover shadow-sm">
+        <thead class="table-dark">
+            <tr>
+                <th>#ID</th>
+                <th>Kart UID</th>
+                <th>Zaman</th>
+                <th>Durum</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var kayit in Model)
+            {
+                <tr>
+                    <td>@kayit.KayitID</td>
+                    <td><span class="fw-bold">@kayit.KartUID</span></td>
+
+                    <td>@kayit.Tarih.ToString("dd.MM.yyyy HH:mm:ss")</td>
+
+                    <td>
+                        @if (kayit.Islem == 1)
+                        {
+                            <span class="badge bg-success">🟢 GİRİŞ</span>
+                        }
+                        else if (kayit.Islem == 0)
+                        {
+                            <span class="badge bg-danger">🔴 ÇIKIŞ</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-warning text-dark">⚠️ YETKİSİZ</span>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
